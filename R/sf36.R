@@ -1,3 +1,4 @@
+library('jsonlite');
 library("uuid");
 
 computeSF36 <- function(json) {
