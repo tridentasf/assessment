@@ -42,8 +42,8 @@ computeSF36 <- function(json) {
   d <- as.numeric(json$items$'10'$subquestions$'2'$response_value)+1;
   e <- as.numeric(json$items$'10'$subquestions$'3'$response_value)+1;
   if (a==1) {a <- 5} else if (a==2) {a <- 4.4} else if (a==3) {a <- 3.4} else if (a==4) {a <- 2.0} else if (a==5) {a <- 1};
-  c <- 5-c;
-  e <- 5-e;
+  c <- 6-c;
+  e <- 6-e;
   sum <- a+b+c+d+e;
   general_health_score <- (sum-5)/20*100;
   general_health_list <-list(type=unbox('New'),source=unbox('OCPU'),id=unbox(UUIDgenerate()), category=unbox('sf36'), measurement=unbox('General Health'), timestamp=unbox(''), value=unbox(general_health_score), unit=unbox(''));
@@ -53,8 +53,8 @@ computeSF36 <- function(json) {
   e <- as.numeric(json$items$'8'$subquestions$'4'$response_value)+1;
   g <- as.numeric(json$items$'8'$subquestions$'6'$response_value)+1;
   i <- as.numeric(json$items$'8'$subquestions$'8'$response_value)+1;
-  a <- 6-a;
-  e <- 6-e;
+  a <- 7-a;
+  e <- 7-e;
   sum <- a+e+g+i;
   vitality_score <- (sum-4)/20*100;
   vitality_list <-list(type=unbox('New'),source=unbox('OCPU'),id=unbox(UUIDgenerate()), category=unbox('sf36'), measurement=unbox('Vitality'), timestamp=unbox(''), value=unbox(vitality_score), unit=unbox(''));
@@ -62,7 +62,7 @@ computeSF36 <- function(json) {
   #social
   a <- as.numeric(json$items$'5'$response_value)+1;
   b <- as.numeric(json$items$'9'$response_value)+1;
-  a <- 5-a;
+  a <- 6-a;
   sum <- a+b;
   social_score <- (sum-2)/8*100;
   social_list <-list(type=unbox('New'),source=unbox('OCPU'),id=unbox(UUIDgenerate()), category=unbox('sf36'), measurement=unbox('Social'), timestamp=unbox(''), value=unbox(social_score), unit=unbox(''));
@@ -81,18 +81,29 @@ computeSF36 <- function(json) {
   d <- as.numeric(json$items$'8'$subquestions$'3'$response_value)+1;
   f <- as.numeric(json$items$'8'$subquestions$'5'$response_value)+1;
   h <- as.numeric(json$items$'8'$subquestions$'7'$response_value)+1;
-  d <- 6-d;
-  h <- 6-h;
+  d <- 7-d;
+  h <- 7-h;
   sum <- b+c+d+f+g;
   mental_health_score <- (sum-5)/25*100;
   mental_list <-list(type=unbox('New'),source=unbox('OCPU'),id=unbox(UUIDgenerate()), category=unbox('sf36'), measurement=unbox('Mental'), timestamp=unbox(''), value=unbox(mental_health_score), unit=unbox(''));
   
   #health transition
   a <- as.numeric(json$items$'1'$response_value)+1;
-  health_transition_score <- (a-1)/4*100;
+  a <- 6-a;
+  health_transition_score <- (a-3)/2*100;
   health_transition_list <-list(type=unbox('New'),source=unbox('OCPU'),id=unbox(UUIDgenerate()), category=unbox('sf36'), measurement=unbox('Health Transition'), timestamp=unbox(''), value=unbox(health_transition_score), unit=unbox(''));
   
-  all_results <- list(physical_list, role_physical_list, pain_list, general_health_list, vitality_list, social_list, role_emotional_list, mental_list, health_transition_list);
+  #means
+  physical_mean <- list(type=unbox('New'),source=unbox('OCPU'),id=unbox(UUIDgenerate()), category=unbox('sf36'), measurement=unbox('Physical Health Average'), timestamp=unbox(''), value=unbox(87), unit=unbox(''));
+  role_physical_mean <-list(type=unbox('New'),source=unbox('OCPU'),id=unbox(UUIDgenerate()), category=unbox('sf36'), measurement=unbox('Role-Physical Health Average'), timestamp=unbox(''), value=unbox(84), unit=unbox(''));
+  pain_mean <-list(type=unbox('New'),source=unbox('OCPU'),id=unbox(UUIDgenerate()), category=unbox('sf36'), measurement=unbox('Bodily Pain Average'), timestamp=unbox(''), value=unbox(78), unit=unbox(''));
+  general_health_mean <-list(type=unbox('New'),source=unbox('OCPU'),id=unbox(UUIDgenerate()), category=unbox('sf36'), measurement=unbox('General Health Average'), timestamp=unbox(''), value=unbox(72), unit=unbox(''));
+  vitality_mean <-list(type=unbox('New'),source=unbox('OCPU'),id=unbox(UUIDgenerate()), category=unbox('sf36'), measurement=unbox('Vitality Average'), timestamp=unbox(''), value=unbox(61), unit=unbox(''));
+  social_mean <-list(type=unbox('New'),source=unbox('OCPU'),id=unbox(UUIDgenerate()), category=unbox('sf36'), measurement=unbox('Social Average'), timestamp=unbox(''), value=unbox(84), unit=unbox(''));
+  role_emotional_mean <-list(type=unbox('New'),source=unbox('OCPU'),id=unbox(UUIDgenerate()), category=unbox('sf36'), measurement=unbox('Role-Emotional Health Average'), timestamp=unbox(''), value=unbox(80), unit=unbox(''));
+  mental_mean <-list(type=unbox('New'),source=unbox('OCPU'),id=unbox(UUIDgenerate()), category=unbox('sf36'), measurement=unbox('Mental Average'), timestamp=unbox(''), value=unbox(73), unit=unbox(''));
+  
+  all_results <- list(physical_list, role_physical_list, pain_list, general_health_list, vitality_list, social_list, role_emotional_list, mental_list, health_transition_list, physical_mean, role_physical_mean, pain_mean, general_health_mean, vitality_mean, social_mean, role_emotional_mean, mental_mean);
   
   return(all_results);
 }
